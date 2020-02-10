@@ -12,6 +12,7 @@ public class AnyClass {
 		// CODE
 		// This is not the code you are looking for.
 		//testy testy
+		System.out.println("test");
 	}
 
 }
