@@ -12,6 +12,7 @@ public class AnyClass {
 		// CODE
 		// This is not the code you are looking for.
 		//testy testy test
+		//Another synchronus test
 		System.out.println("test");
 	}
 
