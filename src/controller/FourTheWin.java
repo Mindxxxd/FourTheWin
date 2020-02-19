@@ -7,7 +7,6 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 
 import data.DataModell;
-import data.Player;
 import views.ComputerView;
 
 /** This is basically the Controller Class.
@@ -30,13 +29,14 @@ public class FourTheWin implements KeyListener {
 		// Creating the Frame.
 		JFrame gameFrame = new JFrame("Four The Win: THE GAME");
 		gameFrame.setSize(500, 500);
-		gameFrame.setLayout(new GridLayout(1, 1));
+		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		gameFrame.setVisible(true);
 
 		// Initializing the data Modell
 		dataModell = new DataModell(); // CODE update constructor. Till now its a placeholder.
 
 		// Initializing the Views
-		ComputerView computerView = new ComputerView(dataModell, gameFrame.getContentPane());
+		ComputerView computerView = new ComputerView(dataModell, gameFrame);
 		dataModell.addView(computerView); // TELL Why this happens? implemented interface
 
 		// CODE Initialize Lighthouse View
