@@ -1,13 +1,15 @@
 package controller;
 
-import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 
 import data.DataModell;
 import views.ComputerView;
+import views.LighthouseView;
 
 /** This is basically the Controller Class.
  * @author Mindxxxd. 19.02.2020. */
@@ -21,25 +23,38 @@ public class FourTheWin implements KeyListener {
 
 	/** The DataModell itself to store stuff. */
 	private DataModell dataModell;
+	/** The Computer View. */
+	private ComputerView computerView;
+	/** The Lighthosue View. */
+	private LighthouseView lighthouseView;
+	/** The Computer Frame. */
+	private JFrame gameFrame;
 
 	/** Constructor opens the Window, initializes everything. Starts game. */
 	public FourTheWin() {
 		// Creating the Frame.
-		JFrame gameFrame = new JFrame("Four The Win: THE GAME");
+		gameFrame = new JFrame("Four The Win: THE GAME");
 		gameFrame.setSize(500, 500);
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gameFrame.setVisible(true);
+		gameFrame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				lighthouseView.close();
+			}
+		});
 
-		// Initializing the data Modell
+		// Initializing the data Modell.
 		dataModell = new DataModell(); // CODE update constructor. Till now its a placeholder.
 
-		// Initializing the Views
-		ComputerView computerView = new ComputerView(dataModell, gameFrame);
+		// Initializing the Computer View.
+		computerView = new ComputerView(dataModell, gameFrame);
 		dataModell.addView(computerView);
 
-		// CODE Initialize Lighthouse View
+		// Initializing the Lighthouse View.
+		lighthouseView = new LighthouseView(dataModell);
+		dataModell.addView(lighthouseView);
 
-		// CODE ActionListeners
+		// ActionListeners.
 		gameFrame.addKeyListener(this);
 	}
 
