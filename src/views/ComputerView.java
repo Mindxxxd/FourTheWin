@@ -38,25 +38,28 @@ public class ComputerView implements View {
 	/** The display container to work with. */
 	private final JFrame gameFrame;
 
-	/** COMMENT
+	/** Constructor to load graphics and firstly update the View.
 	 * @param data    The data modell to fetch data from.
 	 * @param display The display to draw stuff on. */
 	public ComputerView(DataModell data, JFrame gameFrame) {
 		this.data = data;
 		this.gameFrame = gameFrame;
-		try {
-			yellowStoneImage = ImageIO.read(new File(YELLOW_STONE_PATH));
-			yellowStoneImage = yellowStoneImage.getScaledInstance(gameFrame.getWidth() / 7, gameFrame.getHeight() / 7,
-					0);
-			redStoneImage = ImageIO.read(new File(RED_STONE_PATH));
-			redStoneImage = redStoneImage.getScaledInstance(gameFrame.getWidth() / 7, gameFrame.getHeight() / 7, 0);
-			boardImage = ImageIO.read(new File(BOARD_GRAPHICS_PATH));
-			boardImage = boardImage.getScaledInstance(gameFrame.getWidth(), gameFrame.getHeight(), 0);
+		if (yellowStoneImage == null || redStoneImage == null || boardImage == null) {
+			try {
+				yellowStoneImage = ImageIO.read(new File(YELLOW_STONE_PATH));
+				yellowStoneImage = yellowStoneImage.getScaledInstance(gameFrame.getWidth() / 7,
+						gameFrame.getHeight() / 7, 0);
+				redStoneImage = ImageIO.read(new File(RED_STONE_PATH));
+				redStoneImage = redStoneImage.getScaledInstance(gameFrame.getWidth() / 7, gameFrame.getHeight() / 7, 0);
+				boardImage = ImageIO.read(new File(BOARD_GRAPHICS_PATH));
+				boardImage = boardImage.getScaledInstance(gameFrame.getWidth(), gameFrame.getHeight(), 0);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.exit(-1);
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.exit(-1);
+			}
 		}
+
 		update();
 	}
 
@@ -69,16 +72,16 @@ public class ComputerView implements View {
 		panel.setSize(gameFrame.getWidth(), gameFrame.getHeight());
 		panel.setLayout(new GridLayout(1, 1));
 
-		// test image processing
+		// draws playboard
 		BufferedImage actualPlayboard = new BufferedImage(gameFrame.getWidth(), gameFrame.getHeight(),
 				BufferedImage.TYPE_INT_RGB);
 		Graphics graphics = actualPlayboard.getGraphics();
 		graphics.drawImage(boardImage, 0, 0, null);
 
 		// CODE NOW DRAW PLAYSTONES!! THIS IS ONLY FOR TESTING!!
-		double yelX=1400.0/7*3, yelY = 1400.0/7*3, redX = 1400.0/7*4, redY = 1400.0/7*5;
-		graphics.drawImage(yellowStoneImage, (int) yelX*500/1400+1, (int) yelY*500/1400, null);
-		graphics.drawImage(redStoneImage, (int) redX*500/1400+1, (int) redY*500/1400, null);
+		double yelX = 1400.0 / 7 * 3, yelY = 1400.0 / 7 * 3, redX = 1400.0 / 7 * 4, redY = 1400.0 / 7 * 5;
+		graphics.drawImage(yellowStoneImage, (int) yelX * 500 / 1400, (int) yelY * 500 / 1400, null);
+		graphics.drawImage(redStoneImage, (int) redX * 500 / 1400, (int) redY * 500 / 1400, null);
 
 		// add everything to panel
 		ImageIcon icon = new ImageIcon(actualPlayboard);

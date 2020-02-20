@@ -13,18 +13,16 @@ import views.ComputerView;
  * @author Mindxxxd. 19.02.2020. */
 public class FourTheWin implements KeyListener {
 
-	/** COMMENT
+	/** Main method to start game.
 	 * @param args */
 	public static void main(String[] args) {
 		new FourTheWin();
 	}
-	/**
-	 * COMMENT field
-	 */
-	private DataModell dataModell;
-	
 
-	/** COMMENT */
+	/** The DataModell itself to store stuff. */
+	private DataModell dataModell;
+
+	/** Constructor opens the Window, initializes everything. Starts game. */
 	public FourTheWin() {
 		// Creating the Frame.
 		JFrame gameFrame = new JFrame("Four The Win: THE GAME");
@@ -37,7 +35,7 @@ public class FourTheWin implements KeyListener {
 
 		// Initializing the Views
 		ComputerView computerView = new ComputerView(dataModell, gameFrame);
-		dataModell.addView(computerView); // TELL Why this happens? implemented interface
+		dataModell.addView(computerView);
 
 		// CODE Initialize Lighthouse View
 
@@ -45,15 +43,13 @@ public class FourTheWin implements KeyListener {
 		gameFrame.addKeyListener(this);
 	}
 
-	/**
-	 *Key pressed handling. Working with (ws)ad!
-	 *@param e	The key Event.
-	 */
+	/** Key pressed handling. Working with (ws)ad!
+	 * @param e The key Event. */
 	@Override
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyChar()) {
 		case ' ':
-			dataModell.makeTurn(); 
+			dataModell.makeTurn();
 			break;
 		case 'a':
 			dataModell.movePlayStone(-1);
@@ -67,8 +63,6 @@ public class FourTheWin implements KeyListener {
 		}
 
 	}
-	
-	
 
 	/** Nothing happens when key is typed. */
 	@Override
